@@ -1,0 +1,18 @@
+{
+  "research_repository": "https://github.com/Mingel-github/animal-fyp",
+  "research_commit": "03b5ef903660cc8eeb75d4229e1ca250c011d273",
+  "prediction_export": "Byte-identical copies with descriptive public paths.",
+  "source_record_sha256": {
+    "vggish129": "6f7aeb1e229b0adf364ebd98282c219d583618a4969752f52cecfbc02088f929",
+    "yamnet": "def3208ae4d605ce8c2568c5ba48b3e90f47a4f7e79f5af899e2c8a866c66326",
+    "perch1281": "264eaa471905c3b712e7437efbe5ff2a98e4fba61ff924a51a17becb75e2cc8c",
+    "cnn14": "29c66839bf11f960b1e871bdfac26175b121e4437a950698aee2c34524e755b4",
+    "aves": "ae558ef2e02440afee39cfea39a1227cda97d198896df3b441ba511e55be9b5f",
+    "ssast": "d17675436ef284f5996781a55789b7d8d20f2fb2be9ff24cc2f03385a6736b18",
+    "ast": "322b80b38bd3054ca1f5ce9564475839464143b0a329e586d4ada08735a744bc",
+    "multiscale_ast": "2703d8bff7c9370e69e3b4ecafee3774b53a23ed93d3632cefc62411dc0bf6b8",
+    "ast_acoustic": "26302514169172edd9a4be1461d250bdee5d5acb64995ad482841ba7955c6c55",
+    "resast": "dc280905286f7e2b5d073458e63fa62b7eee198f05732882cf31ee88d82f7300"
+  },
+  "common_configuration_lock_sha256": "686007530a41c9c387a53c074c7110d5fade360e7f08a5a3b3e799dba197590c"
+}

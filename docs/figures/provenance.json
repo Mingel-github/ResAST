@@ -1,0 +1,10 @@
+{
+  "purpose": "Intermediate-feature illustration, separate from the quantitative seed subset.",
+  "model": "resast",
+  "base_seed": 137,
+  "repeat": 2,
+  "fold": 0,
+  "rear_slices": "Repeated front slice for schematic depth; not additional measured channels.",
+  "svg_sha256": "ffa2583cd9f9680896b11003d519e3035fe7ac98acb992cbc6dd25968c6d8f56",
+  "png_sha256": "120d4658ef70a93c8ad60dc3dd1fbc23f6880d213ce89674f218157824c56ae4"
+}

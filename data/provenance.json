@@ -1,0 +1,13 @@
+{
+  "upstream": "https://github.com/aster-droide/feline-age-prediction",
+  "revision": "3d02295bef1500d2b2500a124596f77010181391",
+  "manifest_sha256": "e1212fea40f265431c502009982eb43e4d5c7956bc0d38cf697e3e8f897f8353",
+  "roles_sha256": "ed2d1c1378804317fdb24bb3dddd2d120fb08e4e09bce129ec284e31ed8a7452",
+  "source_manifest_sha256": "68e5131dc5d3cd611ecdda30e5176a6dcc90c0ea2500a6d8a4d9b066ce11a72f",
+  "source_roles_sha256": "87deda39808297e1af5b71283e1d7487a7b88d9288cb492c488e3e64fb91c433",
+  "changes": [
+    "Retain source metadata, cleaning decisions and individual audio checksums.",
+    "Make local_relpath relative to the upstream checkout.",
+    "Publish existing role rows for repeats 0, 1, 2; preserve their order."
+  ]
+}

@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "resast"
+version = "0.1.0"
+description = "Multiscale audio spectrogram transformer with acoustic residual fusion"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+dependencies = [
+    "numpy==1.25.2",
+    "pandas==1.5.3",
+    "scipy==1.11.4",
+    "soundfile==0.14.0",
+    "librosa==0.10.2.post1",
+    "torch==2.2.2",
+    "torchaudio==2.2.2",
+    "transformers==4.48.3",
+]
+
+[project.optional-dependencies]
+test = ["pytest==8.3.4"]
+author-baselines = ["tensorflow==2.15.0"]
+feature-baselines = ["panns-inference==0.1.1", "torchlibrosa==0.1.0", "esp-aves==1.0.0"]
+
+[project.scripts]
+resast-train = "resast.cli.train:main"
+resast-lock = "resast.cli.lock:main"
+resast-evaluate = "resast.cli.evaluate:main"
+resast-ensemble = "resast.cli.ensemble:main"
+resast-predict = "resast.cli.predict:main"
+resast-prepare = "resast.cli.prepare:main"
+resast-reference = "resast.cli.reference:main"
+resast-extract = "resast.cli.extract:main"
+resast-search = "resast.cli.search:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

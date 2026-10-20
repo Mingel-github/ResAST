@@ -1,0 +1,35 @@
+{
+  "ast": {
+    "repository": "MIT/ast-finetuned-audioset-10-10-0.4593",
+    "revision": "f826b80d28226b62986cc218e5cec390b1096902",
+    "files": {
+      "config.json": "a93d525511d77e8ecc933d09674b85099815bbbb417c228a4edd655e252fb9ff",
+      "preprocessor_config.json": "8d04ba5a9c6fca5d39d0de2b1fd05ecf79deb589fbba279728bbebac39934231",
+      "model.safetensors": "ae0c1e2ad4e1381d851fa9bf298ba13ebc9c5a914cdee2dbe427a6583869924d"
+    }
+  },
+  "ssast": {
+    "repository": "Simon-Kotchou/ssast-base-patch-audioset-16-16",
+    "revision": "f67df8e895e787bad0aec434563e8f0a1f61c794",
+    "files": {
+      "config.json": "67b170d66d707f9dddf999ceaec30e8aad32af03357c3c108aee588e73c48b42",
+      "preprocessor_config.json": "1daf43b863db2057e84a4a433d9eaa60d38d7505290657ab49296525c5ac6d9c",
+      "model.safetensors": "a31a7f70fea7648847882ecd278369f6f1b1cb0050364c4dff7d3c8cf8aabfe6"
+    }
+  },
+  "cnn14": {
+    "repository": "https://zenodo.org/records/3987831",
+    "files": {
+      "Cnn14_mAP=0.431.pth": "0dc499e40e9761ef5ea061ffc77697697f277f6a960894903df3ada000e34b31"
+    }
+  },
+  "aves": {
+    "repository": "https://github.com/earthspecies/aves",
+    "revision": "fd1b660ac454719d2c4b9628df2d0cd3993a4c89",
+    "download_base": "https://storage.googleapis.com/esp-public-files/ported_aves/",
+    "files": {
+      "aves-base-bio.torchaudio.pt": "7a7dfaff2ea0b617cae1d82d7831e766be2a9ac00e37962a26f0a1b285be2530",
+      "aves-base-bio.torchaudio.model_config.json": "5c6ad4a9469bfa0f4ca705eed0cb814241048546833cbd291a32a6082ed96dc9"
+    }
+  }
+}

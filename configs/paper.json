@@ -1,0 +1,667 @@
+{
+  "schema_version": 1,
+  "repeats": [
+    0,
+    1,
+    2
+  ],
+  "folds": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "seeds": [
+    17,
+    43,
+    101
+  ],
+  "backbone": "../data/models/ast",
+  "backbone_checksums": "pretrained.json",
+  "data": {
+    "roles": {
+      "path": "../splits/roles.csv",
+      "sha256": "ed2d1c1378804317fdb24bb3dddd2d120fb08e4e09bce129ec284e31ed8a7452"
+    },
+    "tokens": "../data/cache/block10_tokens.npy",
+    "token_index": "../data/cache/block10_index.npz",
+    "fbank": "../data/cache/ast_fbank.npz",
+    "ast_embeddings": "../data/cache/ast_embeddings.npz",
+    "acoustic": "../data/cache/acoustic.npz",
+    "cnn14": "../data/cache/cnn14.npz",
+    "aves": "../data/cache/aves.npz",
+    "ssast": "../data/cache/ssast.npz",
+    "vggish129": {
+      "path": "../data/raw/feline-age-prediction/dataset/embeddings/vggish_looped_embeddings.csv",
+      "sha256": "0c4856c12bb3b829a9731b426619d5f82d3510307374e756555fc8eb0349e641"
+    },
+    "perch1281": {
+      "path": "../data/raw/feline-age-prediction/dataset/embeddings/perch_looped_embeddings.csv",
+      "sha256": "6664cb23799da12dce56a79e4de628bb9d61daeed83bf4fdf62ff116480f17d7"
+    },
+    "yamnet": {
+      "path": "../data/raw/feline-age-prediction/dataset/embeddings/yamnet_looped_embeddings.csv",
+      "sha256": "5a5a58a29043b0de8fdf71e13b6c94747c5309abe709800671be37f9f9d8c53c"
+    }
+  },
+  "models": {
+    "vggish129": {
+      "training": {
+        "learning_rate": 0.003109800273709165,
+        "dropout": 0.44571035356880917,
+        "weight_decay": 0.0,
+        "optimizer_epsilon": 1e-07,
+        "batch_size": 128,
+        "maximum_epochs": 500,
+        "patience": 30,
+        "minimum_delta": 1e-06,
+        "gradient_clip": 1.0
+      }
+    },
+    "yamnet": {
+      "training": {
+        "learning_rate": 0.009272615392034748,
+        "dropout": 0.40037235360372386,
+        "weight_decay": 0.0,
+        "optimizer_epsilon": 1e-07,
+        "batch_size": 32,
+        "maximum_epochs": 500,
+        "patience": 30,
+        "minimum_delta": 1e-06,
+        "gradient_clip": 1.0
+      }
+    },
+    "perch1281": {
+      "training": {
+        "learning_rate": 0.007402414884293732,
+        "dropout": 0.15688606637942396,
+        "weight_decay": 0.0,
+        "optimizer_epsilon": 1e-07,
+        "batch_size": 32,
+        "maximum_epochs": 500,
+        "patience": 30,
+        "minimum_delta": 1e-06,
+        "gradient_clip": 1.0
+      }
+    },
+    "cnn14": {
+      "training": {
+        "learning_rate": 0.006,
+        "dropout": 0.44571035356880917,
+        "weight_decay": 0.0,
+        "optimizer_epsilon": 1e-07,
+        "batch_size": 4,
+        "maximum_epochs": 50,
+        "patience": 8,
+        "minimum_delta": 1e-06,
+        "gradient_clip": 1.0
+      }
+    },
+    "aves": {
+      "training": {
+        "learning_rate": 0.006,
+        "dropout": 0.44571035356880917,
+        "weight_decay": 0.0,
+        "optimizer_epsilon": 1e-07,
+        "batch_size": 4,
+        "maximum_epochs": 50,
+        "patience": 8,
+        "minimum_delta": 1e-06,
+        "gradient_clip": 1.0
+      }
+    },
+    "ssast": {
+      "training": {
+        "learning_rate": 0.006,
+        "dropout": 0.44571035356880917,
+        "weight_decay": 0.0,
+        "optimizer_epsilon": 1e-07,
+        "batch_size": 4,
+        "maximum_epochs": 50,
+        "patience": 8,
+        "minimum_delta": 1e-06,
+        "gradient_clip": 1.0
+      }
+    },
+    "ast": {
+      "training": {
+        "learning_rate": 0.006,
+        "dropout": 0.44571035356880917,
+        "weight_decay": 0.0,
+        "optimizer_epsilon": 1e-07,
+        "batch_size": 4,
+        "maximum_epochs": 50,
+        "patience": 8,
+        "minimum_delta": 1e-06,
+        "gradient_clip": 1.0
+      },
+      "cells": [
+        {
+          "repeat": 0,
+          "fold": 0,
+          "configuration_id": "q15",
+          "training": {
+            "learning_rate": 0.012,
+            "dropout": 0.25,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 0,
+          "fold": 1,
+          "configuration_id": "q13",
+          "training": {
+            "learning_rate": 0.012,
+            "dropout": 0.44571035356880917,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 0,
+          "fold": 2,
+          "configuration_id": "q02",
+          "training": {
+            "learning_rate": 0.006,
+            "dropout": 0.25,
+            "weight_decay": 0.0
+          }
+        },
+        {
+          "repeat": 0,
+          "fold": 3,
+          "configuration_id": "q02",
+          "training": {
+            "learning_rate": 0.006,
+            "dropout": 0.25,
+            "weight_decay": 0.0
+          }
+        },
+        {
+          "repeat": 1,
+          "fold": 0,
+          "configuration_id": "q03",
+          "training": {
+            "learning_rate": 0.006,
+            "dropout": 0.25,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 1,
+          "fold": 1,
+          "configuration_id": "q08",
+          "training": {
+            "learning_rate": 0.0015,
+            "dropout": 0.44571035356880917,
+            "weight_decay": 0.0
+          }
+        },
+        {
+          "repeat": 1,
+          "fold": 2,
+          "configuration_id": "q15",
+          "training": {
+            "learning_rate": 0.012,
+            "dropout": 0.25,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 1,
+          "fold": 3,
+          "configuration_id": "q12",
+          "training": {
+            "learning_rate": 0.012,
+            "dropout": 0.44571035356880917,
+            "weight_decay": 0.0
+          }
+        },
+        {
+          "repeat": 2,
+          "fold": 0,
+          "configuration_id": "q14",
+          "training": {
+            "learning_rate": 0.012,
+            "dropout": 0.25,
+            "weight_decay": 0.0
+          }
+        },
+        {
+          "repeat": 2,
+          "fold": 1,
+          "configuration_id": "q06",
+          "training": {
+            "learning_rate": 0.003,
+            "dropout": 0.25,
+            "weight_decay": 0.0
+          }
+        },
+        {
+          "repeat": 2,
+          "fold": 2,
+          "configuration_id": "q15",
+          "training": {
+            "learning_rate": 0.012,
+            "dropout": 0.25,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 2,
+          "fold": 3,
+          "configuration_id": "q05",
+          "training": {
+            "learning_rate": 0.003,
+            "dropout": 0.44571035356880917,
+            "weight_decay": 0.001
+          }
+        }
+      ]
+    },
+    "multiscale_ast": {
+      "training": {
+        "learning_rate": 0.006,
+        "dropout": 0.44571035356880917,
+        "weight_decay": 0.0,
+        "optimizer_epsilon": 1e-07,
+        "batch_size": 4,
+        "maximum_epochs": 50,
+        "patience": 8,
+        "minimum_delta": 1e-06,
+        "gradient_clip": 1.0
+      },
+      "cells": [
+        {
+          "repeat": 0,
+          "fold": 0,
+          "configuration_id": "q15",
+          "training": {
+            "learning_rate": 0.012,
+            "dropout": 0.25,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 0,
+          "fold": 1,
+          "configuration_id": "q12",
+          "training": {
+            "learning_rate": 0.012,
+            "dropout": 0.44571035356880917,
+            "weight_decay": 0.0
+          }
+        },
+        {
+          "repeat": 0,
+          "fold": 2,
+          "configuration_id": "q07",
+          "training": {
+            "learning_rate": 0.003,
+            "dropout": 0.25,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 0,
+          "fold": 3,
+          "configuration_id": "q05",
+          "training": {
+            "learning_rate": 0.003,
+            "dropout": 0.44571035356880917,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 1,
+          "fold": 0,
+          "configuration_id": "q03",
+          "training": {
+            "learning_rate": 0.006,
+            "dropout": 0.25,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 1,
+          "fold": 1,
+          "configuration_id": "q15",
+          "training": {
+            "learning_rate": 0.012,
+            "dropout": 0.25,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 1,
+          "fold": 2,
+          "configuration_id": "q14",
+          "training": {
+            "learning_rate": 0.012,
+            "dropout": 0.25,
+            "weight_decay": 0.0
+          }
+        },
+        {
+          "repeat": 1,
+          "fold": 3,
+          "configuration_id": "q02",
+          "training": {
+            "learning_rate": 0.006,
+            "dropout": 0.25,
+            "weight_decay": 0.0
+          }
+        },
+        {
+          "repeat": 2,
+          "fold": 0,
+          "configuration_id": "q10",
+          "training": {
+            "learning_rate": 0.0015,
+            "dropout": 0.25,
+            "weight_decay": 0.0
+          }
+        },
+        {
+          "repeat": 2,
+          "fold": 1,
+          "configuration_id": "q09",
+          "training": {
+            "learning_rate": 0.0015,
+            "dropout": 0.44571035356880917,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 2,
+          "fold": 2,
+          "configuration_id": "q13",
+          "training": {
+            "learning_rate": 0.012,
+            "dropout": 0.44571035356880917,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 2,
+          "fold": 3,
+          "configuration_id": "q02",
+          "training": {
+            "learning_rate": 0.006,
+            "dropout": 0.25,
+            "weight_decay": 0.0
+          }
+        }
+      ]
+    },
+    "ast_acoustic": {
+      "training": {
+        "learning_rate": 0.006,
+        "dropout": 0.44571035356880917,
+        "weight_decay": 0.0,
+        "optimizer_epsilon": 1e-07,
+        "batch_size": 4,
+        "maximum_epochs": 50,
+        "patience": 8,
+        "minimum_delta": 1e-06,
+        "gradient_clip": 1.0
+      },
+      "cells": [
+        {
+          "repeat": 0,
+          "fold": 0,
+          "configuration_id": "q15",
+          "training": {
+            "learning_rate": 0.012,
+            "dropout": 0.25,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 0,
+          "fold": 1,
+          "configuration_id": "q15",
+          "training": {
+            "learning_rate": 0.012,
+            "dropout": 0.25,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 0,
+          "fold": 2,
+          "configuration_id": "q02",
+          "training": {
+            "learning_rate": 0.006,
+            "dropout": 0.25,
+            "weight_decay": 0.0
+          }
+        },
+        {
+          "repeat": 0,
+          "fold": 3,
+          "configuration_id": "q05",
+          "training": {
+            "learning_rate": 0.003,
+            "dropout": 0.44571035356880917,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 1,
+          "fold": 0,
+          "configuration_id": "q01",
+          "training": {
+            "learning_rate": 0.006,
+            "dropout": 0.44571035356880917,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 1,
+          "fold": 1,
+          "configuration_id": "q12",
+          "training": {
+            "learning_rate": 0.012,
+            "dropout": 0.44571035356880917,
+            "weight_decay": 0.0
+          }
+        },
+        {
+          "repeat": 1,
+          "fold": 2,
+          "configuration_id": "q03",
+          "training": {
+            "learning_rate": 0.006,
+            "dropout": 0.25,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 1,
+          "fold": 3,
+          "configuration_id": "q13",
+          "training": {
+            "learning_rate": 0.012,
+            "dropout": 0.44571035356880917,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 2,
+          "fold": 0,
+          "configuration_id": "q15",
+          "training": {
+            "learning_rate": 0.012,
+            "dropout": 0.25,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 2,
+          "fold": 1,
+          "configuration_id": "q13",
+          "training": {
+            "learning_rate": 0.012,
+            "dropout": 0.44571035356880917,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 2,
+          "fold": 2,
+          "configuration_id": "q13",
+          "training": {
+            "learning_rate": 0.012,
+            "dropout": 0.44571035356880917,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 2,
+          "fold": 3,
+          "configuration_id": "q06",
+          "training": {
+            "learning_rate": 0.003,
+            "dropout": 0.25,
+            "weight_decay": 0.0
+          }
+        }
+      ]
+    },
+    "resast": {
+      "training": {
+        "learning_rate": 0.006,
+        "dropout": 0.44571035356880917,
+        "weight_decay": 0.0,
+        "optimizer_epsilon": 1e-07,
+        "batch_size": 4,
+        "maximum_epochs": 50,
+        "patience": 8,
+        "minimum_delta": 1e-06,
+        "gradient_clip": 1.0
+      },
+      "cells": [
+        {
+          "repeat": 0,
+          "fold": 0,
+          "configuration_id": "q14",
+          "training": {
+            "learning_rate": 0.012,
+            "dropout": 0.25,
+            "weight_decay": 0.0
+          }
+        },
+        {
+          "repeat": 0,
+          "fold": 1,
+          "configuration_id": "q13",
+          "training": {
+            "learning_rate": 0.012,
+            "dropout": 0.44571035356880917,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 0,
+          "fold": 2,
+          "configuration_id": "q02",
+          "training": {
+            "learning_rate": 0.006,
+            "dropout": 0.25,
+            "weight_decay": 0.0
+          }
+        },
+        {
+          "repeat": 0,
+          "fold": 3,
+          "configuration_id": "q01",
+          "training": {
+            "learning_rate": 0.006,
+            "dropout": 0.44571035356880917,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 1,
+          "fold": 0,
+          "configuration_id": "q01",
+          "training": {
+            "learning_rate": 0.006,
+            "dropout": 0.44571035356880917,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 1,
+          "fold": 1,
+          "configuration_id": "q13",
+          "training": {
+            "learning_rate": 0.012,
+            "dropout": 0.44571035356880917,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 1,
+          "fold": 2,
+          "configuration_id": "q01",
+          "training": {
+            "learning_rate": 0.006,
+            "dropout": 0.44571035356880917,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 1,
+          "fold": 3,
+          "configuration_id": "q12",
+          "training": {
+            "learning_rate": 0.012,
+            "dropout": 0.44571035356880917,
+            "weight_decay": 0.0
+          }
+        },
+        {
+          "repeat": 2,
+          "fold": 0,
+          "configuration_id": "q15",
+          "training": {
+            "learning_rate": 0.012,
+            "dropout": 0.25,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 2,
+          "fold": 1,
+          "configuration_id": "q09",
+          "training": {
+            "learning_rate": 0.0015,
+            "dropout": 0.44571035356880917,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 2,
+          "fold": 2,
+          "configuration_id": "q13",
+          "training": {
+            "learning_rate": 0.012,
+            "dropout": 0.44571035356880917,
+            "weight_decay": 0.001
+          }
+        },
+        {
+          "repeat": 2,
+          "fold": 3,
+          "configuration_id": "q02",
+          "training": {
+            "learning_rate": 0.006,
+            "dropout": 0.25,
+            "weight_decay": 0.0
+          }
+        }
+      ]
+    }
+  }
+}
