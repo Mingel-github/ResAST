@@ -2,6 +2,8 @@
 
 Run commands from the repository root. The examples use Windows PowerShell and an NVIDIA GPU. Install the package as described in the [README](../README.md), preferably in a separate Python 3.10 environment.
 
+On a CPU-only computer, install the CPU version of PyTorch and replace `--device cuda` with `--device cpu` in the commands below. The CPU path uses full precision; the GPU training path uses mixed precision, so retraining can produce different numerical results. Checking bundled predictions with `resast-reference --root .` requires no GPU or retraining.
+
 ## Prepare data
 
 Download the pinned source into a new directory and verify it:

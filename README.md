@@ -4,11 +4,9 @@ Code for three-class feline age-group classification from vocalisations: kitten,
 
 ## Model
 
-![Multiscale attention](docs/figures/multiscale_attention.png)
+![ResAST architecture](docs/figures/resast_overview.png)
 
-The two branches share queries and use original or locally pooled keys and values. Learned coefficients mix their outputs in the final two encoder blocks. The acoustic residual is added to the classification head.
-
-Heatmaps illustrate intermediate features from one forward pass, with blue to light yellow indicating lower to higher values within each normalization group. Rear slices repeat the front slice for schematic depth. Figure provenance is recorded in [provenance.json](docs/figures/provenance.json).
+The same call supplies spectrogram segments to AST and 20 acoustic descriptors to a small MLP. Multiscale attention operates in the final two encoder blocks. The bounded acoustic residual is added to the 128-dimensional AST head representation before three-class prediction.
 
 ## Getting started
 
@@ -18,6 +16,8 @@ Use Python 3.10 and run commands from this directory. The tested GPU environment
 python -m pip install torch==2.2.2 torchaudio==2.2.2 --index-url https://download.pytorch.org/whl/cu121
 python -m pip install -c requirements/reference-constraints.txt -e ".[test]"
 ```
+
+For CPU-only use, replace `cu121` with `cpu` in the first installation command and use `--device cpu` for feature extraction, training and prediction. No source changes are needed. CPU execution is slower; retrained results may differ from the GPU reference because numerical precision and computation differ.
 
 Follow the [running guide](docs/running.md) to prepare data, train a model, evaluate predictions or run the audio demo. It includes a small training example and commands for the comparison models.
 
