@@ -27,6 +27,7 @@ class FitResult:
 
 def snapshot(model):
     if hasattr(model, "tail"):
+        # Store the learned head and gates; copied AST tail weights stay frozen.
         return {
             "head": state_copy(model.head),
             "raw_gamma": None if model.tail.raw_gamma is None else model.tail.raw_gamma.detach().cpu().clone(),
@@ -86,6 +87,7 @@ def train_epoch(model, loader, optimizer, scaler, store, acoustic, weights, devi
     for batch in loader:
         indices = batch["call_indices"].numpy()
         labels = torch.from_numpy(store.labels[indices]).to(device)
+        # Apply inverse-frequency class weights per call on the training side only.
         call_weights = weights[labels]
         optimizer.zero_grad(set_to_none=True)
         with torch.autocast(device_type=device.type, dtype=torch.float16, enabled=device.type == "cuda"):
@@ -138,6 +140,7 @@ def fit(
 ):
     check_fit(store, train, validation, fixed_epochs, config)
     model = make_model(name, store, train, config, seed, backbone, acoustic).to(device)
+    # Reset training RNGs after model initialization.
     set_seed(seed + 1_000_000)
     parameters = [p for p in model.parameters() if p.requires_grad]
     optimizer = torch.optim.Adamax(
@@ -155,6 +158,7 @@ def fit(
         if validation is not None:
             cats, units = predict(model, store, validation, config, device, seed, acoustic)
             row["validation_metrics"] = metrics(cats)
+            # Select epochs by unweighted identity-level validation cross-entropy.
             value = row["validation_metrics"]["cross_entropy"]
             if value < best_loss - config.minimum_delta:
                 best_loss, best_epoch, stale = value, epoch, 0

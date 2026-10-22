@@ -53,6 +53,7 @@ class ResASTClassifier(nn.Module):
         self, tokens: torch.Tensor, segment_to_call: torch.Tensor,
         call_count: int, acoustic_features: torch.Tensor | None = None,
     ) -> torch.Tensor:
+        # Average segment embeddings per call before classification.
         calls = average_segments(self.tail(tokens), segment_to_call, call_count)
         if not MODEL_FLAGS[self.model_name][1]:
             return self.head(calls)
@@ -71,6 +72,7 @@ def build_classifier(
     if training_embeddings.ndim != 2 or training_embeddings.shape[1] != 768 or not len(training_embeddings):
         raise ValueError("Expected original-AST training embeddings with shape [calls, 768]")
     multiscale, acoustic = MODEL_FLAGS[model_name]
+    # Fit AST normalization on the current training partition only.
     mean = training_embeddings.mean(axis=0)
     scale = training_embeddings.std(axis=0)
     if acoustic:

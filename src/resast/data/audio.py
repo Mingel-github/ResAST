@@ -40,6 +40,7 @@ def segment_waveform(
     if len(waveform) <= window_samples:
         return [waveform]
     starts = list(range(0, len(waveform) - window_samples + 1, hop_samples))
+    # Anchor the last full window at the call end when the hop misses it.
     final_start = len(waveform) - window_samples
     if starts[-1] != final_start:
         starts.append(final_start)

@@ -10,6 +10,7 @@ def pool_patch_kv(values: torch.Tensor) -> torch.Tensor:
     """Pool 2x2 patch neighborhoods: [B, 12, 146, 64] -> [B, 12, 38, 64]."""
     if values.ndim != 4 or tuple(values.shape[1:]) != (12, 146, 64):
         raise ValueError("Expected 12 heads, 146 tokens and 64 features per head")
+    # Keep CLS/DIST tokens intact while pooling the 12x12 patch grid.
     patches = values[:, :, 2:]
     batch, heads, _, features = patches.shape
     coarse = patches.reshape(batch, heads, 6, 2, 6, 2, features)
@@ -34,21 +35,28 @@ def multiscale_block(
         or attention.attention_probs_dropout_prob != 0.0
     ):
         raise ValueError("Unexpected AST attention geometry or dropout")
+    # Q, K, V are affine projections of Z = LayerNorm(X), split into 12 heads.
     mixed_query = attention.query(normalized)
     key = attention.transpose_for_scores(attention.key(normalized))
     value = attention.transpose_for_scores(attention.value(normalized))
     query = attention.transpose_for_scores(mixed_query)
+    # Fine and coarse paths share full-resolution queries; only coarse K/V are pooled.
+    # F = softmax(Q K^T / sqrt(64)) V; softmax runs over key tokens.
     fine = nn.functional.scaled_dot_product_attention(
         query, key, value, None, 0.0, is_causal=False, scale=None
     )
     context = fine
     if gamma is not None:
+        # C = softmax(Q Kc^T / sqrt(64)) Vc; pooled Kc/Vc have 2 + 36 tokens.
         coarse = nn.functional.scaled_dot_product_attention(
             query, pool_patch_kv(key), pool_patch_kv(value),
             None, 0.0, is_causal=False, scale=None,
         )
+        # Per-head alpha = tanh(gamma) in (-1, 1); zero starts at fine attention.
         alpha = torch.tanh(gamma).to(fine.dtype).reshape(1, 12, 1, 1)
+        # Y = F + alpha * (C - F); both paths keep all 146 query positions.
         context = fine + alpha * (coarse - fine)
+    # Concatenate heads, then retain the AST output projection and residuals.
     context = context.permute(0, 2, 1, 3).contiguous().view(hidden.shape[0], 146, 768)
     attended = block.attention.output(context, normalized) + hidden
     return block.output(block.intermediate(block.layernorm_after(attended)), attended)
@@ -75,6 +83,7 @@ class ASTTail(nn.Module):
         self.eval()
 
     def train(self, mode: bool = True):
+        # Keep copied AST blocks in eval mode while raw_gamma remains trainable.
         return super().train(False)
 
     def sequence(self, tokens: torch.Tensor) -> torch.Tensor:
@@ -86,6 +95,7 @@ class ASTTail(nn.Module):
 
     def forward(self, tokens: torch.Tensor) -> torch.Tensor:
         sequence = self.sequence(tokens)
+        # Segment embedding = (CLS + DIST) / 2 after the final LayerNorm.
         return (sequence[:, 0] + sequence[:, 1]) / 2.0
 
 

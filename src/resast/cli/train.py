@@ -179,6 +179,7 @@ def run(args):
         request["selection_lock_sha256"] = sha256(args.selection_lock)
         selection_dir = run_directory(args.output, "select", args.model, args.repeat, args.fold, args.seed)
         fixed_epochs = locked_epochs(args.selection_lock, selection_dir, request)
+        # Refit from scratch on train+validation for the locked epoch count.
         train = np.sort(np.concatenate([indices["train"], indices["validation"]]))
         validation = None
     else:

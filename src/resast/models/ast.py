@@ -24,6 +24,7 @@ def adapt_geometry(
     new_time = (max_length - patch_size) // time_stride + 1
     projection_weight = embeddings.patch_embeddings.projection.weight.detach().clone()
     projection_bias = embeddings.patch_embeddings.projection.bias.detach().clone()
+    # Resize patch positions; preserve CLS/DIST positions and projection weights.
     special_positions = embeddings.position_embeddings[:, :2]
     patch_positions = embeddings.position_embeddings[:, 2:]
     hidden_size = patch_positions.shape[-1]

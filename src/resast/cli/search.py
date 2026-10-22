@@ -23,6 +23,7 @@ def choose(candidates, tolerance=1e-12):
     pool = list(candidates)
     if not pool:
         raise ValueError("Search candidates are empty")
+    # Rank validation candidates by Macro-F1, accuracy, Brier, then config ID.
     for key, maximize in (("mean_macro_f1", True), ("mean_accuracy", True), ("mean_brier", False)):
         values = [c[key] for c in pool]
         if not np.isfinite(values).all():

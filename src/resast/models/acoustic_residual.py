@@ -6,6 +6,7 @@ from torch import nn
 
 
 def hidden_rms(hidden: torch.Tensor) -> torch.Tensor:
+    # RMS(h) = sqrt(mean(h^2) + eps); detach the scale from gradients.
     return (
         torch.sqrt(hidden.float().square().mean(dim=1, keepdim=True) + 1.0e-8)
         .detach()
@@ -32,6 +33,7 @@ class AcousticResidualHead(nn.Module):
         self.batch_norm = nn.BatchNorm1d(128, eps=1.0e-3, momentum=0.01)
         self.dropout = nn.Dropout(dropout)
         self.output = nn.Linear(128, 3)
+        # Fit imputation and scaling statistics only on the current training partition.
         with np.errstate(all="ignore"):
             median = np.nanmedian(acoustic_train, axis=0)
         median = np.where(np.isfinite(median), median, 0.0).astype(np.float32)
@@ -44,6 +46,7 @@ class AcousticResidualHead(nn.Module):
         self.register_buffer("age_scale", torch.from_numpy(scale))
         self.age_hidden = nn.Linear(20, 60)
         self.age_output = nn.Linear(60, 128)
+        # Start from the exact AST-only path and learn corrections from zero.
         nn.init.zeros_(self.age_output.weight)
         nn.init.zeros_(self.age_output.bias)
 
@@ -58,8 +61,11 @@ class AcousticResidualHead(nn.Module):
             torch.isfinite(acoustic_features), acoustic_features, self.age_median
         )
         standardized = (imputed - self.age_mean) / self.age_scale
+        # g(a) = W2 GELU(W1 a + b1) + b2, with widths 20 -> 60 -> 128.
         context = nn.functional.gelu(self.age_hidden(standardized))
+        # r = 0.25 * RMS(h) * tanh(g(a)); each coordinate is magnitude-bounded.
         residual = 0.25 * hidden_rms(hidden) * torch.tanh(self.age_output(context))
+        # h' = h + r stays 128-dimensional; normalization follows fusion.
         hidden = hidden + residual
         hidden = self.batch_norm(hidden)
         hidden = self.dropout(hidden)

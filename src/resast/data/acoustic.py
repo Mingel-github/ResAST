@@ -126,6 +126,7 @@ def extract_call_features(
     if len(valid_periodicity):
         clipped = np.clip(valid_periodicity, 1.0e-6, 0.999)
         hnr = 10.0 * np.log10(clipped / (1.0 - clipped))
+    # Restrict energy and spectral summaries to frames with a valid F0.
     log_rms = np.full(frame_count, np.nan, dtype=np.float64)
     log_rms[voiced] = np.log(rms[voiced] + 1.0e-10)
     rms_pair_delta = np.abs(np.diff(rms))[pair_mask]

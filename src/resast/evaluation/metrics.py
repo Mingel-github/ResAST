@@ -44,6 +44,7 @@ def units_to_cats(units: pd.DataFrame) -> pd.DataFrame:
         labels = group["true_label"].unique()
         if len(labels) != 1:
             raise ValueError(f"Inconsistent labels for {cat_id}")
+        # Average unit probabilities per ID before taking argmax.
         p = group[list(PROBABILITIES)].to_numpy(dtype=np.float64).mean(axis=0)
         rows.append({
             "cat_id": str(cat_id), "true_label": int(labels[0]), "unit_count": len(group),
@@ -102,6 +103,7 @@ def ensemble(frames: dict[int, pd.DataFrame], seeds=(17, 43, 101)) -> pd.DataFra
         if not first[["cat_id", "true_label"]].equals(frame[["cat_id", "true_label"]]):
             raise ValueError("Ensemble members must share identities and labels")
     combined = first[["cat_id", "true_label"]].copy()
+    # Give each aligned seed equal weight in probability space.
     p = np.stack([f[list(PROBABILITIES)].to_numpy(dtype=np.float64) for f in aligned]).mean(axis=0)
     for i, name in enumerate(PROBABILITIES):
         combined[name] = p[:, i]

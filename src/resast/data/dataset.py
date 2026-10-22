@@ -101,6 +101,7 @@ class DeterministicNoSingletonBatchSampler(Sampler):
             order[start : start + self.batch_size]
             for start in range(0, self.size, self.batch_size)
         ]
+        # Borrow one identity from the previous batch to avoid a singleton cat batch.
         if len(batches) > 1 and len(batches[-1]) == 1:
             batches[-1].insert(0, batches[-2].pop())
         if any(len(batch) == 1 for batch in batches):
@@ -119,6 +120,7 @@ class CatTokenDataset(Dataset):
             raise ValueError("Call indices must be unique")
         if np.any(selected < 0) or np.any(selected >= len(store.call_ids)):
             raise ValueError("Call index is out of range")
+        # One dataset item contains every selected call from one identity.
         self.cat_ids = np.asarray(sorted(np.unique(store.cat_ids[selected]).tolist()))
         self.call_indices = []
         for cat_id in self.cat_ids:
@@ -145,6 +147,7 @@ def collate_cats(rows) -> dict:
     offset = 0
     for row_tokens, row_mapping, row_calls, cat_id in rows:
         tokens.append(row_tokens)
+        # Shift local call indices into the concatenated batch call axis.
         mappings.append(row_mapping + offset)
         calls.append(row_calls)
         cats.append(cat_id)
@@ -175,6 +178,7 @@ def role_indices(store: TokenStore, roles: pd.DataFrame, repeat: int, fold: int)
     mapping = dict(zip(cell["cat_id"].astype(str), cell["role"].astype(str)))
     if set(mapping) != set(store.cat_ids.astype(str)):
         raise ValueError("Role table must cover every identity")
+    # Expand identity roles to calls without splitting any identity across roles.
     call_roles = np.asarray([mapping[cat_id] for cat_id in store.cat_ids], dtype=str)
     result = {
         role: np.flatnonzero(call_roles == role).astype(np.int64)
